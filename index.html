@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <main class="webapp">
+        <section class="maincard">
+            <header class="card-header">
+                <h1 class="title"> Your to Do</h1>
+                <p class="subtitle"> Add new task </p>
+            </header>
+
+            <form class="todo-form" novalidate>
+                <div class="form-row">
+                    <input type="text" name="text" class="input task-input" 
+                        placeholder="Add new task" required minlength="2">
+                    <input type="date" name="due-date" class="input date-input" 
+                        aria-label="Due date" required> <!-- harus diisi -->
+
+                    <button class="btn btn-add-task" type="submit" title="Add New Task"> + </button> 
+                                                                <!-- title buat hover button -->
+                </div>
+                <div class="form-helpers">
+                    <small class="hint">Task is required • date is required</small>
+                </div>
+            </form>
+            <div class="controls">
+                <div class="filter">
+                    <button class="filter-btn active">All</button> <!-- active shows which filter is selected in css. js will toggle this. -->
+                    <button class="filter-btn">Active</button>
+                    <button class="filter-btn">Complete</button>
+                </div>
+                <div class="search">
+                    <input class="input search-input" type="search" 
+                        placeholder="Search tasks...">
+                </div>
+
+                <ul class="todo-list">
+                    <li class="todo-row">
+                        <label>
+                            <input type="checkbox" checked disabled>
+                            <span class="todo-text">This is an example of task #1</span>
+                        </label>                        
+                        <div class="todo-meta">
+                            <time datetime="2025-10-16">Oct 16, 2025</time>
+                            <button class="btn btn-delete" title="Delete task">X</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <footer class="card-footer">
+                <p class="remaining">Your remaining todos: <strong>1</strong></p>
+                <blockquote class="quote">"Doing what you love..." — Wayne Dyer</blockquote>
+            </footer> 
+        </section>
+    </main>    
+</body>
+</html>
