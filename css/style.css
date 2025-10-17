@@ -21,7 +21,7 @@ body {
   background: var(--bg);
   display: flex;
   justify-content: center;   /* centers horizontally */
-  align-items: flex-start;   /* change to center if you want vertical center too */
+  align-items: center;      /* centers vertically */ 
   min-height: 100vh;         /* full viewport height */
   margin: 0;
   padding: 40px 16px;        /* adds a little breathing space */
