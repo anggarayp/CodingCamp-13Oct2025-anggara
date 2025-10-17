@@ -19,12 +19,12 @@
             </header>
 
              <!-- Add task form (HTML-level validation only for now) -->
-            <form class="todo-form" novalidate>
+            <form class="todo-form">
                 <div class="form-row">
                     <input type="text" name="text" class="input task-input" 
                         placeholder="Add new task" required minlength="2">
                     <input type="date" name="due-date" class="input date-input" 
-                        aria-label="Due date" required> <!-- harus diisi -->
+                        aria-label="Due date" placeholder="dd-mm-yyyy" required> <!-- harus diisi -->
 
                     <button class="btn btn-add-task" type="submit" title="Add New Task"> + </button> 
                                                                 <!-- title buat hover button -->
@@ -40,6 +40,8 @@
                     <button class="filter-btn active">All</button> <!-- active shows which filter is selected in css. js will toggle this. -->
                     <button class="filter-btn">Active</button>
                     <button class="filter-btn">Complete</button>
+                    <button class="filter-btn">Today</button>
+                    <button class="filter-btn">Upcoming</button>
                 </div>
                 <div class="search">
                     <input class="input search-input" type="search" 
@@ -87,7 +89,11 @@
         <footer class="card-footer">
                 <p class="remaining">Your remaining todos: <strong>1</strong></p>
                 <blockquote class="quote">"Doing what you love is the cornerstone of having abundance in your life." — Wayne Dyer</blockquote>
+
+                <p>&copy; 2025 AnggaraYP Todo List App</p>
         </footer>
+
+        <script src="js/script.js"></script>
     </main>    
 </body>
 </html>
