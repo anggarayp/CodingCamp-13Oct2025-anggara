@@ -1,0 +1,193 @@
+/* css/style.css
+    Single stylesheet for the whole project
+*/
+
+/* Basic Resets */
+:root{
+    --bg: #f5f6f7;
+  --card: #ffffff;
+  --muted: #8a8a8a;
+  --accent: #333333;
+  --accent-soft: #f0f0f0;
+  --primary: #159bf4;
+  --green: #4dd55d;
+  --danger: #e23f3f;
+  --radius: 10px;
+  --max-width: 900px;
+  font-family: 'Poppins', sans-serif;
+  color-scheme: light;
+}
+
+body {
+  background: var(--bg);
+  display: flex;
+  justify-content: center;   /* centers horizontally */
+  align-items: flex-start;   /* change to center if you want vertical center too */
+  min-height: 100vh;         /* full viewport height */
+  margin: 0;
+  padding: 40px 16px;        /* adds a little breathing space */
+}
+
+/* --- App container --- */
+.webapp{ 
+    width: 100%; 
+    max-width: var(--max-width);
+}
+
+
+/* --- Card --- */
+.main-todo-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 36px;
+  box-shadow: 0 10px 24px rgba(30,30,30,0.06);
+}
+
+/* Card-Header */
+.card-header { margin-bottom: 18px; }
+.title {
+  font-size: 22px;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.subtitle { 
+    color: var(--muted); 
+    font-size: 13px; 
+}
+
+/* Form row */
+.todo-form .form-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.input {
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  background: white;
+  outline: none;
+  min-height: 40px;
+}
+.task-input { flex: 1; }
+.date-input { width: 150px; }
+
+/* Buttons */
+.btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+/* stands out bbutton */
+.btn-add-task {
+  background: var(--accent);
+  color: white;
+  width: 44px;
+  height: 44px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 10px;
+  margin-left: 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+.btn-delete {
+  background: var(--accent-soft);
+  padding: 6px 8px;
+  border-radius: 8px;
+  margin-left: 12px;
+}
+
+/* Helper text */
+.form-helpers { margin-top: 6px; }
+.hint { color: var(--muted); font-size: 12px; }
+
+/* Controls (filter + search) */
+.controls { display:flex; justify-content:space-between; align-items:center; gap:12px; margin: 18px 0; flex-wrap:wrap;}
+.filter { display:flex; gap:8px; }
+.filter-btn {
+  border: 1px solid #e6e6e6;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.filter-btn.active {
+  background: #fff7e6;
+  border-color: #f0dca5;
+  box-shadow: 0 2px 6px rgba(200,150,0,0.08);
+}
+
+/* Task list (cards) */
+.todo-list { 
+    list-style: none; 
+    display:grid; 
+    gap:12px; 
+    padding-top: 6px; 
+}
+.todo-item {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid gray;
+  background: linear-gradient(180deg, #fff, #fbfbfb);
+  box-shadow: 0 2px 6px rgba(20,20,20,0.03);
+}
+.todo-item.completed {
+  opacity: 0.78;
+}
+
+/* left row inside item */
+.todo-row { 
+    display:flex; 
+    align-items:center; 
+    gap:12px; 
+}
+.todo-row input[type="checkbox"] { 
+    width:16px; 
+    height:16px; 
+    accent-color: 
+    var(--green); 
+}
+.todo-text { 
+    font-size: 14px; 
+    color: 
+    var(--accent); 
+}
+
+/* right meta area */
+.todo-meta { 
+    display:flex; 
+    align-items:center; 
+    gap:8px; 
+    color:var(--muted); 
+    font-size:12px; 
+}
+.todo-meta time { 
+    background: 
+    var(--accent-soft); 
+    padding:6px 8px; 
+    border-radius:8px; 
+    font-size:12px; 
+}
+
+/* Footer inside card */
+.card-footer { margin-top: 18px; color: var(--muted); font-size: 13px; }
+.remaining { margin-bottom: 6px; }
+.quote { font-size: 12px; color: #999; margin-top: 6px; font-style: italic; }
+
+/* --- Responsive --- */
+@media (max-width: 720px) {
+  .card { padding: 22px; border-radius: 12px; }
+  .date-input { display: none; } /* hide the date field in very small screens to simplify layout — optional */
+  .controls { gap: 8px; }
+  .todo-meta time { display: none; }
+}

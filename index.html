@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+
+    <!-- 1️⃣ Google Font (Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" 
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <main class="webapp">
-        <section class="maincard">
+        <section class="main-todo-card">
             <header class="card-header">
                 <h1 class="title"> Your to Do</h1>
                 <p class="subtitle"> Add new task </p>
             </header>
 
+             <!-- Add task form (HTML-level validation only for now) -->
             <form class="todo-form" novalidate>
                 <div class="form-row">
                     <input type="text" name="text" class="input task-input" 
@@ -28,6 +33,8 @@
                     <small class="hint">Task is required • date is required</small>
                 </div>
             </form>
+
+            <!-- Filter and controls (visual only, no JS yet) -->
             <div class="controls">
                 <div class="filter">
                     <button class="filter-btn active">All</button> <!-- active shows which filter is selected in css. js will toggle this. -->
@@ -38,26 +45,49 @@
                     <input class="input search-input" type="search" 
                         placeholder="Search tasks...">
                 </div>
-
-                <ul class="todo-list">
-                    <li class="todo-row">
-                        <label>
-                            <input type="checkbox" checked disabled>
-                            <span class="todo-text">This is an example of task #1</span>
-                        </label>                        
-                        <div class="todo-meta">
-                            <time datetime="2025-10-16">Oct 16, 2025</time>
-                            <button class="btn btn-delete" title="Delete task">X</button>
-                        </div>
-                    </li>
-                </ul>
             </div>
 
-            <footer class="card-footer">
-                <p class="remaining">Your remaining todos: <strong>1</strong></p>
-                <blockquote class="quote">"Doing what you love..." — Wayne Dyer</blockquote>
-            </footer> 
+            <!-- Task list (sample entries) -->
+            <ul class="todo-list">
+                <li class="todo-item completed">
+                    <label class="todo-row">
+                        <input type="checkbox" checked disabled>
+                        <span class="todo-text">This is an example of task #1</span>
+                    </label>                        
+                    <div class="todo-meta">
+                        <time datetime="2025-10-16">Oct 16, 2025</time>
+                        <button class="btn btn-delete" title="Delete task">X</button>
+                    </div>
+                </li>
+
+                <li class="todo-item">
+                    <label class="todo-row">
+                        <input type="checkbox" disabled />
+                        <span class="todo-text">This is an example of task #2</span>
+                    </label>
+                    <div class="todo-meta">
+                        <time datetime="2025-10-20">Oct 20, 2025</time>
+                        <button class="btn btn-delete" title="Delete task">✕</button>
+                    </div>
+                </li>
+
+                <li class="todo-item completed">
+                    <label class="todo-row">
+                        <input type="checkbox" checked disabled />
+                        <span class="todo-text">This is an example of task #3</span>
+                    </label>
+                    <div class="todo-meta">
+                        <time datetime="2025-10-22">Oct 22, 2025</time>
+                        <button class="btn btn-delete" title="Delete task">✕</button>
+                    </div>
+                </li>
+            </ul>
         </section>
+
+        <footer class="card-footer">
+                <p class="remaining">Your remaining todos: <strong>1</strong></p>
+                <blockquote class="quote">"Doing what you love is the cornerstone of having abundance in your life." — Wayne Dyer</blockquote>
+        </footer>
     </main>    
 </body>
 </html>
