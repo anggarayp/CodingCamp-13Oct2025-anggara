@@ -5,6 +5,7 @@ const dateInput = document.querySelector(".date-input");
 const todoList = document.querySelector(".todo-list");
 const remainingText = document.querySelector(".remaining strong");
 const filterButtons = document.querySelectorAll(".filter-btn");
+const searchInput = document.querySelector(".search-input");
 
 // === Main Data Storage ===
 let todosDB = [];
@@ -26,6 +27,12 @@ function bindEvents() {
       const filter = btn.textContent.trim();
       renderTodos(filter);
     });
+  });
+
+  // Search input
+  searchInput.addEventListener("input", () => {
+    const filter = document.querySelector(".filter-btn.active").textContent.trim();
+    renderTodos(filter);
   });
 }
 
@@ -79,58 +86,67 @@ function loadTodos() {
 
 // === Render Todo List ===
 function renderTodos(filter) {
-  todoList.innerHTML = ""; // Clears previous list
-  const todayDate = new Date().toISOString().split("T")[0];
+    todoList.innerHTML = ""; // Clears previous list
+    const todayDate = new Date().toISOString().split("T")[0];
 
-  // Filter logic
-  const filteredTodos = todosDB.filter((todo) => {
-    if (filter === "All") return true;
-    if (filter === "Active") return !todo.completed;
-    if (filter === "Complete") return todo.completed;
-    if (filter === "Today") return todo.dueDate === todayDate && !todo.completed;
-    if (filter === "Upcoming") return todo.dueDate > todayDate && !todo.completed;
-  });
+    // Filter buttons logic
+    const searchTerm = searchInput.value.toLowerCase();
 
-  // Render filtered todos
-  filteredTodos.forEach((todo) => {
-    const li = document.createElement("li");
-    li.className = "todo-item" + (todo.completed ? " completed" : "");
+    // Search through array todosDB
+    const filteredTodos = todosDB.filter((todo) => {
+        const matchesFilter =
+            (filter === "All") ||       // show everything
+            (filter === "Active" && !todo.completed) ||     // task not yet completed
+            (filter === "Complete" && todo.completed) ||    // task completed
+            (filter === "Today" && todo.dueDate === today && !todo.completed) ||    // task due today
+            (filter === "Upcoming" && todo.dueDate > today && !todo.completed);     // future tasks incomplete
 
-    li.innerHTML = `
-      <label class="todo-row">
-        <input type="checkbox" ${todo.completed ? "checked" : ""}>
-        <span class="todo-text">${todo.text}</span>
-      </label>
-      <div class="todo-meta">
-        <time datetime="${todo.dueDate}">
-          ${new Date(todo.dueDate).toLocaleDateString("id-ID", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
-        </time>
-        <button class="btn btn-delete" title="Delete task">✕</button>
-      </div>
-    `;
-
-    // Toggle complete
-    li.querySelector("input[type='checkbox']").addEventListener("change", () => {
-      todo.completed = !todo.completed;
-      saveTodos();
-      renderTodos(filter);
+        // Checks user inputed in search bar
+        const matchesSearch = todo.text.toLowerCase().includes(searchTerm);
+        // Show the search result
+        return matchesFilter && matchesSearch;
     });
 
-    // Delete todo
-    li.querySelector(".btn-delete").addEventListener("click", () => {
-      todosDB = todosDB.filter((t) => t.id !== todo.id);
-      saveTodos();
-      renderTodos(filter);
+    // Render filtered todos
+    filteredTodos.forEach((todo) => {
+        const li = document.createElement("li");
+        li.className = "todo-item" + (todo.completed ? " completed" : "");
+
+        li.innerHTML = `
+        <label class="todo-row">
+            <input type="checkbox" ${todo.completed ? "checked" : ""}>
+            <span class="todo-text">${todo.text}</span>
+        </label>
+        <div class="todo-meta">
+            <time datetime="${todo.dueDate}">
+            ${new Date(todo.dueDate).toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+            })}
+            </time>
+            <button class="btn btn-delete" title="Delete task">✕</button>
+        </div>
+        `;
+
+        // Toggle complete
+        li.querySelector("input[type='checkbox']").addEventListener("change", () => {
+        todo.completed = !todo.completed;
+        saveTodos();
+        renderTodos(filter);
+        });    
+
+        // Delete todo
+        li.querySelector(".btn-delete").addEventListener("click", () => {
+        todosDB = todosDB.filter((t) => t.id !== todo.id);
+        saveTodos();
+        renderTodos(filter);
+        });
+
+        todoList.appendChild(li);
     });
 
-    todoList.appendChild(li);
-  });
-
-  updateRemaining();
+    updateRemaining();
 }
 
 // === Update Remaining Tasks ===
